@@ -1,21 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
+
+const FORMSPREE_FORM_ID = "mjgndrql";
 
 export default function Home() {
   const [heroEmail, setHeroEmail] = useState("");
   const [accessEmail, setAccessEmail] = useState("");
-  const [heroSubmitted, setHeroSubmitted] = useState(false);
-  const [accessSubmitted, setAccessSubmitted] = useState(false);
-
-  function handleSubmit(e: React.FormEvent, type: "hero" | "access") {
-    e.preventDefault();
-    const email = type === "hero" ? heroEmail : accessEmail;
-    if (!email || !email.includes("@")) return;
-
-    if (type === "hero") setHeroSubmitted(true);
-    else setAccessSubmitted(true);
-  }
+  const [heroFormState, submitHeroForm] = useForm(FORMSPREE_FORM_ID);
+  const [accessFormState, submitAccessForm] = useForm(FORMSPREE_FORM_ID);
 
   return (
     <div
@@ -174,7 +168,7 @@ export default function Home() {
               boxShadow: "0 10px 25px -5px rgba(15, 23, 42, 0.08)",
             }}
           >
-            {heroSubmitted ? (
+            {heroFormState.succeeded ? (
               <div
                 style={{
                   background: "#f0fdf4",
@@ -190,11 +184,12 @@ export default function Home() {
               </div>
             ) : (
               <form
-                onSubmit={(e) => handleSubmit(e, "hero")}
+                onSubmit={submitHeroForm}
                 style={{ display: "flex", gap: "8px" }}
               >
                 <input
                   type="email"
+                  name="email"
                   placeholder="your@email.com"
                   value={heroEmail}
                   onChange={(e) => setHeroEmail(e.target.value)}
@@ -212,6 +207,7 @@ export default function Home() {
                 />
                 <button
                   type="submit"
+                  disabled={heroFormState.submitting}
                   style={{
                     height: "42px",
                     padding: "0 20px",
@@ -221,15 +217,21 @@ export default function Home() {
                     fontWeight: 600,
                     border: "none",
                     borderRadius: "10px",
-                    cursor: "pointer",
+                    cursor: heroFormState.submitting ? "default" : "pointer",
+                    opacity: heroFormState.submitting ? 0.7 : 1,
                     whiteSpace: "nowrap",
                     boxShadow: "0 4px 12px rgba(37, 99, 235, 0.25)",
                   }}
                 >
-                  Connect Gmail — free
+                  {heroFormState.submitting ? "Sending..." : "Connect Gmail — free"}
                 </button>
               </form>
             )}
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={heroFormState.errors}
+            />
           </div>
           <p style={{ fontSize: "12px", color: "#94a3b8", marginTop: "12px" }}>
             Free beta • No credit card • No setup fee
@@ -506,7 +508,7 @@ export default function Home() {
               who want to stop missing deals buried in their inbox.
             </p>
 
-            {accessSubmitted ? (
+            {accessFormState.succeeded ? (
               <div
                 style={{
                   maxWidth: "380px",
@@ -524,7 +526,7 @@ export default function Home() {
               </div>
             ) : (
               <form
-                onSubmit={(e) => handleSubmit(e, "access")}
+                onSubmit={submitAccessForm}
                 style={{
                   display: "flex",
                   gap: "8px",
@@ -534,6 +536,7 @@ export default function Home() {
               >
                 <input
                   type="email"
+                  name="email"
                   placeholder="your@email.com"
                   value={accessEmail}
                   onChange={(e) => setAccessEmail(e.target.value)}
@@ -552,6 +555,7 @@ export default function Home() {
                 />
                 <button
                   type="submit"
+                  disabled={accessFormState.submitting}
                   style={{
                     height: "42px",
                     padding: "0 20px",
@@ -561,15 +565,21 @@ export default function Home() {
                     fontWeight: 600,
                     border: "none",
                     borderRadius: "10px",
-                    cursor: "pointer",
+                    cursor: accessFormState.submitting ? "default" : "pointer",
+                    opacity: accessFormState.submitting ? 0.7 : 1,
                     whiteSpace: "nowrap",
                     boxShadow: "0 4px 12px rgba(37, 99, 235, 0.2)",
                   }}
                 >
-                  Request access
+                  {accessFormState.submitting ? "Sending..." : "Request access"}
                 </button>
               </form>
             )}
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={accessFormState.errors}
+            />
             <p style={{ fontSize: "12px", color: "#94a3b8", marginTop: "12px" }}>
               We&apos;ll be in touch within 2 business days.
             </p>
