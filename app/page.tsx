@@ -149,18 +149,44 @@ export default function Home() {
               color: "#64748b",
               lineHeight: 1.7,
               maxWidth: "520px",
-              margin: "0 auto 2.5rem",
+              margin: "0 auto 1rem",
             }}
           >
             AI scans every email, logs real deals to HubSpot, pings you on Discord,
             and sends replies during UK business hours. Zero setup. Zero monthly bill.
           </p>
 
-          {/* Elevated Hero Input Card */}
+          <div
+            style={{
+              display: "inline-block",
+              background: "#003F87",
+              color: "#ffffff",
+              borderRadius: "20px",
+              padding: "4px 12px",
+              fontSize: "11px",
+              fontWeight: 600,
+              marginBottom: "2.5rem",
+            }}
+          >
+            Built on OpenClaw 2026.7.1
+          </div>
+
+          {/* Elevated Hero Input Card + Secondary CTA */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "stretch",
+              gap: "12px",
+              maxWidth: "700px",
+              margin: "0 auto",
+            }}
+          >
           <div
             style={{
               maxWidth: "440px",
-              margin: "0 auto",
+              flex: "1 1 320px",
               background: "#ffffff",
               padding: "8px",
               borderRadius: "14px",
@@ -233,8 +259,46 @@ export default function Home() {
               errors={heroFormState.errors}
             />
           </div>
+
+          <a
+            href="https://youtube.com/shorts/ZtWuZAr5KUs"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              flex: "0 1 auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              padding: "0 20px",
+              minHeight: "58px",
+              background: "#ffffff",
+              color: "#003F87",
+              fontSize: "14px",
+              fontWeight: 700,
+              border: "2px solid #003F87",
+              borderRadius: "14px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <span
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "6px solid transparent",
+                borderBottom: "6px solid transparent",
+                borderLeft: "9px solid #FF6B00",
+              }}
+            />
+            Watch Pipeline Demo
+          </a>
+          </div>
           <p style={{ fontSize: "12px", color: "#94a3b8", marginTop: "12px" }}>
             Free beta • No credit card • No setup fee
+          </p>
+          <p style={{ fontSize: "12px", color: "#64748b", marginTop: "8px", fontWeight: 500 }}>
+            106/106 tests passing · Pipeline live in production · Built by a solo technical founder
           </p>
 
           {/* Stat Anchor Bar */}
@@ -312,33 +376,33 @@ export default function Home() {
             {[
               {
                 step: "1",
-                title: "Gmail scan",
-                desc: "DealClaw connects to your Gmail inbox and scans incoming emails every 15 minutes — no forwarding rules, no plugins needed.",
+                title: "Lead arrives",
+                desc: "A lead comes in via email (UK) or WhatsApp (Pakistan) — wherever your customers already reach out.",
                 tag: "Automatic",
                 tagBg: "#eff6ff",
                 tagColor: "#2563eb",
               },
               {
                 step: "2",
-                title: "AI deal detection",
-                desc: "Gemini AI reads each email and decides — is this a genuine business inquiry or noise? Spam, newsletters, and cold outreach are filtered out.",
+                title: "AI classification",
+                desc: "Gemini 2.5 Flash classifies it in seconds — serious buyer, time-waster, or spam — so you only spend time on real deals.",
                 tag: "AI-powered",
                 tagBg: "#f0fdf4",
                 tagColor: "#15803d",
               },
               {
                 step: "3",
-                title: "CRM + Discord alert",
-                desc: "Confirmed deals are logged automatically in HubSpot CRM. You get a Discord ping with the deal summary so you're never out of the loop.",
+                title: "Logged to HubSpot",
+                desc: "Every classified lead is logged automatically to HubSpot CRM — no manual data entry, nothing falls through the cracks.",
                 tag: "Automatic",
                 tagBg: "#eff6ff",
                 tagColor: "#2563eb",
               },
               {
                 step: "4",
-                title: "You approve, DealClaw sends",
-                desc: "When you're ready to reply, approve it in one click. DealClaw sends the email during UK business hours — Monday to Friday, 9am–5pm.",
-                tag: "You decide",
+                title: "Agent notified instantly",
+                desc: "Your agent gets notified the moment a serious buyer is detected — so you know exactly who to call back, right now.",
+                tag: "Real-time",
                 tagBg: "#fffbeb",
                 tagColor: "#92400e",
               },
